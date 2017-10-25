@@ -1,3 +1,105 @@
-#common {
-  color: #123456;
+/* html 100% 高度 */
+html {
+  height: 100%;
+}
+
+/* body 背景与高度 */
+body {
+  background: #eaedf2;
+  min-height: 600px;
+  height: 100%;
+}
+
+/**
+ * 按钮行样式
+ * 按钮行需占满主体页面的一行
+ */
+.btn-line {
+  background:#f8f8f9;
+  height:40px;
+  line-height:38px;
+}
+
+/* 需要居中的按钮行 */
+.div-center {
+  text-align: center;
+}
+
+/* 按钮间距 */
+.btn-line>.ivu-btn {
+  margin-right: 2%;
+}
+
+/* 最后一个按钮 */
+.btn-line>.ivu-btn:last-child {
+  margin-right: 0;
+}
+
+/*版面号详见页面最后一行元素的右下方*/
+.page-no {
+  /*position: absolute;*/
+  /*display: none;*/
+  text-align: right;
+  color: #e9eaec;
+  right: 0;
+}
+
+/* s号宽度 */
+.mw-s {
+  min-width: 100px;
+}
+
+/* m号宽度 */
+.mw-m {
+  min-width: 200px;
+}
+
+/* l号宽度 */
+.mw-l {
+  min-width: 300px;
+}
+
+/* xl号宽度 */
+.mw-xl {
+  min-width: 400px;
+}
+
+/* 表格中按钮间的竖线样式 */
+.btn-gap {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #d7dde4;
+}
+
+/* 查询条件组 */
+.search-group .ivu-form-item {
+  margin-right: 5%;
+}
+
+/* Radio以及CheckBox组合的间隙 */
+.group-line>label {
+  margin-right: 15px;
+}
+
+/* Radio以及CheckBox组合的间隙 屏蔽最后一个元素 */
+.group-line>label:last-child {
+  margin-right: 0;
+}
+
+/**
+ * 表单按钮行第一个按钮
+ * 表单中的按钮行需要同时额外指定class btn-form
+ */
+.btn-line.btn-form>.ivu-btn:first-child {
+  margin-left: 5%;
+}
+
+/* 可点击元素的指针效果为手型 */
+.clickable {
+  cursor: pointer;
+}
+
+/* 不可点击的为指针 */
+.unclickable {
+  cursor: default;
 }
