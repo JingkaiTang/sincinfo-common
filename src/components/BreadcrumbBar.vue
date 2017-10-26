@@ -1,7 +1,12 @@
 <template>
-  <Breadcrumb>
-    <BreadcrumbItem v-for="(bread, i) in breads" :href="bread.plain ? '' : bread.path" :key="i">{{bread.meta.name}}</BreadcrumbItem>
-  </Breadcrumb>
+  <div>
+    <Icon type="navigate"></Icon>
+    <template v-for="(bread, i) in breads">
+      <span class="breadcrumb breadcrumb-disabled" v-if="bread.meta.plain || i === breads.length-1">{{bread.meta.name}}</span>
+      <span class="breadcrumb" v-else type="text" @click="breadNav(bread.name)">{{bread.meta.name}}</span>
+      <Icon class="breadcrumb-gap" v-if="i !== breads.length-1" type="chevron-right"></Icon>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -12,6 +17,9 @@ export default {
     }
   },
   methods: {
+    breadNav (name) {
+      this.$router.push({name: name})
+    },
     toastBreads () {
       let route = this.$route
       let breads = []
@@ -32,3 +40,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.breadcrumb {
+  color: #39f;
+  cursor: pointer;
+}
+
+.breadcrumb.breadcrumb-disabled {
+  color: #495060;
+  cursor: not-allowed;
+}
+
+.breadcrumb-gap {
+  margin: 0 8px 0 8px;
+  color: #495060;
+}
+</style>
