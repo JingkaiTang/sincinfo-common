@@ -40,22 +40,17 @@ export default {
     menu: Array
   },
   methods: {
-    menuClick (i) {
-    },
-    activeName () {
-    },
     handleResize () {
       let bodyHeight = document.body.clientHeight
       bodyHeight = bodyHeight < 600 ? 600 : bodyHeight
       this.menuHeight = bodyHeight - 54
-      this.contentHeight = bodyHeight - 134
+      this.contentHeight = bodyHeight - 138
     }
   },
   created () {
     // 更新菜单
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
-    this.activeName()
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleResize)
@@ -83,6 +78,9 @@ export default {
   color: #acafb8;
 }
 
+.logo-col {
+}
+
 .body-row {
 }
 
@@ -95,7 +93,7 @@ export default {
 
 .breadcrumb-line {
   height: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .content-line {

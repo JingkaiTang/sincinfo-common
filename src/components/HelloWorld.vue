@@ -7,32 +7,12 @@
 </template>
 
 <script>
+import menu from '@/menu'
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      menu: [
-        {
-          name: '首页',
-          route: 'index',
-          icon: 'ios-home'
-        },
-        {
-          name: '考点管理',
-          route: 'examSiteInfo',
-          icon: 'cube'
-        },
-        {
-          name: '考场管理',
-          route: 'examRoomInfo',
-          icon: 'leaf'
-        },
-        {
-          name: '考试管理',
-          route: 'examManagement',
-          icon: 'magnet'
-        }
-      ]
+      menu: menu
     }
   }
 }
