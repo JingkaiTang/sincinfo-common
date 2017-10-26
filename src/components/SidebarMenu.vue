@@ -1,5 +1,5 @@
 <template>
-  <Menu width="auto" mode="vertical" :theme="theme" :active-name="activeName" @on-select="menuClick">
+  <Menu accordion width="auto" mode="vertical" :theme="theme" :active-name="activeName" @on-select="menuClick">
     <template v-for="(l1, i) in menu">
       <MenuItem v-if="!l1.children || l1.children.length == 0" :name="l1.route">
         <Icon :type="l1.icon || randomIcon()"></Icon>
