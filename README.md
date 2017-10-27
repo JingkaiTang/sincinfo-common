@@ -27,14 +27,16 @@ Vue.use(SincinfoCommon)
 - MainFrame 页面框架
 - SidebarMenu 侧边菜单栏
 - BreadcrumbBar 面包屑导航栏
+- GapButtonGroup
 
 ## MainFrame
 - 包含了SidebarMenu以及BreadcrumbBar的组件，作为整体页面框架使用
 - 使用样例参见HelloWorld.vue
 
 ### menu菜单数据格式
-- 样例参见menu/index.js
-- 标准格式
+样例参见menu/index.js
+
+标准格式
 ```
 {
   name: 'MenuName', // 菜单显示的名字 必选
@@ -45,8 +47,9 @@ Vue.use(SincinfoCommon)
 ```
 
 ### 使面包屑导航栏生效
-- 样例参见路由信息定义
-- 标准格式 路由单元
+样例参见路由信息定义
+
+标准格式 路由单元
 ```
 {
   ..., // 其他路由信息
@@ -59,7 +62,7 @@ Vue.use(SincinfoCommon)
 ```
 
 ## SidebarMenu
-- 无需单独使用
+无需单独使用
 
 ## BreadcrumbBar
-- 无需单独使用
+无需单独使用
