@@ -1,14 +1,10 @@
 import './assets/common.css'
 
-import SidebarMenu from './components/SidebarMenu'
 import MainFrame from './components/MainFrame'
-import BreadcrumbBar from './components/BreadcrumbBar'
 import GapButtonGroup from './components/GapButtonGroup'
 
 const SincinfoCommon = {
-  SidebarMenu,
   MainFrame,
-  BreadcrumbBar,
   GapButtonGroup
 }
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Icon type="navigate"></Icon>
     <template v-for="(bread, i) in breads">
       <span class="breadcrumb breadcrumb-disabled" v-if="bread.plain || bread.meta.plain || i === breads.length-1">{{bread.meta.name}}</span>
       <span class="breadcrumb" v-else type="text" @click="breadNav(bread.name)">{{bread.meta.name}}</span>
