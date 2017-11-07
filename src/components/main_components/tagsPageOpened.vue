@@ -1,4 +1,4 @@
-<style lang="less" scoped>
+<style lang="less">
   @import '../main.less';
 </style>
 

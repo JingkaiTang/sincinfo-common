@@ -1,9 +1,9 @@
-<style lang="less" scoped>
+<style lang="less">
   @import "./main.less";
 </style>
 
 <template>
-  <div class="main" :class="{'main-hide-text': hideMenuText}">
+  <div class="main-frame" :class="{'main-frame-hide-text': hideMenuText}">
     <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
       <div class="logo-con">
         <img v-show="!hideMenuText"  src="../assets/images/logo.jpg" key="max-logo" />
@@ -12,15 +12,15 @@
       <sidebar-menu v-if="!hideMenuText" :menuList="menu" :iconSize="14"/>
       <sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menu"/>
     </div>
-    <div class="main-header-con" :style="{paddingLeft: hideMenuText?'60px':'200px'}">
-      <div class="main-header">
+    <div class="main-frame-header-con" :style="{paddingLeft: hideMenuText?'60px':'200px'}">
+      <div class="main-frame-header">
         <div class="navicon-con">
           <Button :style="{transform: 'rotateZ(' + (this.hideMenuText ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
             <Icon type="navicon" size="32"></Icon>
           </Button>
         </div>
         <div class="header-middle-con">
-          <div class="main-breadcrumb">
+          <div class="main-frame-breadcrumb">
             <breadcrumb-nav></breadcrumb-nav>
           </div>
         </div>
@@ -55,7 +55,7 @@
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
               <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
                 <a href="javascript:void(0)">
-                  <span class="main-user-name">{{ userDropdown.username }}</span>
+                  <span class="main-frame-user-name">{{ userDropdown.username }}</span>
                   <Icon type="arrow-down-b" v-if="userDropdown.dropdown.length > 0"></Icon>
                 </a>
                 <DropdownMenu slot="list" v-if="userDropdown.dropdown.length > 0">
