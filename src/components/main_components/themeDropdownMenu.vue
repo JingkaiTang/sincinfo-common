@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
 export default {
   name: 'themeDropdownMenu',
   data () {
@@ -65,6 +64,9 @@ export default {
       ]
     }
   },
+  props: {
+    username: String
+  },
   methods: {
     setTheme (themeFile) {
       let menuTheme = themeFile.substr(0, 1)
@@ -79,7 +81,7 @@ export default {
       }
       let path = ''
       let themeLink = document.querySelector('link[name="theme"]')
-      let userName = Cookies.get('user')
+      let userName = this.username
       if (localStorage.theme) {
         let themeList = JSON.parse(localStorage.theme)
         let index = 0

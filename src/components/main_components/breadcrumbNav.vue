@@ -42,13 +42,15 @@ export default {
 
 <style scoped>
 .breadcrumb {
-  color: #39f;
+  font-size: 14px;
+  font-weight: bold;
+  color: #495060;
   cursor: pointer;
 }
 
 .breadcrumb.breadcrumb-disabled {
-  color: #495060;
-  cursor: not-allowed;
+  font-weight: normal;
+  cursor: text;
 }
 
 .breadcrumb-gap {
