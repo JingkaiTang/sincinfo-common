@@ -57,6 +57,10 @@ export default {
 </script>
 
 <style scoped>
+.btn-grid {
+  text-align: left;
+}
+
 .grid {
   text-align: center;
   display: inline-block;

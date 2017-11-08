@@ -1,7 +1,3 @@
-<style lang="less" scoped>
-  @import './menu.less';
-</style>
-
 <template>
   <Menu accordion width="auto" :theme="$store.state.menuTheme" :active-name="activeName" @on-select="menuClick">
     <template v-for="(l1, i) in menuList">
