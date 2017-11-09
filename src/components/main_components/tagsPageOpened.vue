@@ -26,9 +26,9 @@
           :name="item.name"
           @on-close="closePage"
           @click.native="linkTo(item)"
-          :closable="item.name==='home_index'?false:true"
-          :color="item.children?(item.children[0].name===currentPageName?'blue':'default'):(item.name===currentPageName?'blue':'default')"
-        >{{ itemTitle(item) }}</Tag>
+          :closable="true"
+          :color="item.name === $route.name ? 'blue' : 'default'"
+        >{{ item.title }}</Tag>
       </transition-group>
     </div>
   </div>
@@ -50,47 +50,24 @@ export default {
     pageTagsList: Array
   },
   computed: {
-    title () {
-      return this.$store.state.currentTitle
-    },
     tagsList () {
-      return this.$store.state.pageOpenedList
+      return this.$store.state.openedPageList
     }
   },
   methods: {
-    itemTitle (item) {
-      if (typeof item.title === 'object') {
-        return this.$t(item.title.i18n)
-      } else {
-        return item.title
-      }
-    },
     closePage (event, name) {
-      // this.$store.commit('removeTag', name)
-      // this.$store.commit('closePage', name)
-      // localStorage.pageOpenedList = JSON.stringify(this.$store.state.pageOpenedList)
-      // if (this.currentPageName === name) {
-      //   let lastPageName = ''
-      //   if (this.$store.state.pageOpenedList.length > 1) {
-      //     lastPageName = this.$store.state.pageOpenedList[1].name
-      //   } else {
-      //     lastPageName = this.$store.state.pageOpenedList[0].name
-      //   }
-      //   this.$router.push({
-      //     name: lastPageName
-      //   })
-      // }
     },
     linkTo (item) {
-      // let routerObj = {}
-      // routerObj.name = item.name
-      // if (item.argu) {
-      //   routerObj.params = item.argu
-      // }
-      // if (item.query) {
-      //   routerObj.query = item.query
-      // }
-      // this.$router.push(routerObj)
+      const route = {
+        name: item.name
+      }
+      if (item.params) {
+        route.params = item.params
+      }
+      if (item.query) {
+        route.query = item.query
+      }
+      this.$router.push(route)
     },
     handlescroll (e) {
       let left = 0
@@ -110,12 +87,12 @@ export default {
       this.tagBodyLeft = left
     },
     handleTagsOption (type) {
-      // if (type === 'clearAll') {
-      //   this.$store.commit('clearAllTags')
-      // } else {
-      //   this.$store.commit('clearOtherTags', this)
-      // }
-      // this.tagBodyLeft = 0
+      if (type === 'clearAll') {
+        this.$store.commit('clearAllTags', this)
+      } else {
+        this.$store.commit('clearOtherTags', this)
+      }
+      this.tagBodyLeft = 0
     },
     moveToView (tag) {
       if (tag.offsetLeft < -this.tagBodyLeft) {
@@ -130,30 +107,16 @@ export default {
     }
   },
   mounted () {
-    // this.refsTag = this.$refs.tagsPageOpened
-    // setTimeout(() => {
-    //   this.refsTag.forEach((item, index) => {
-    //     if (this.$route.name === item.name) {
-    //       let tag = this.refsTag[index].$el
-    //       this.moveToView(tag)
-    //     }
-    //   })
-    // }, 1)  // 这里不设定时器就会有偏移bug
-    // this.tagsCount = this.tagsList.length
-  },
-  watch: {
-    // '$route' (to) {
-    //   this.currentPageName = to.name
-    //   this.$nextTick(() => {
-    //     this.refsTag.forEach((item, index) => {
-    //       if (to.name === item.name) {
-    //         let tag = this.refsTag[index].$el
-    //         this.moveToView(tag)
-    //       }
-    //     })
-    //   })
-    //   this.tagsCount = this.tagsList.length
-    // }
+    this.refsTag = this.$refs.tagsPageOpened
+    setTimeout(() => {
+      this.refsTag.forEach((item, index) => {
+        if (this.$route.name === item.name) {
+          let tag = this.refsTag[index].$el
+          this.moveToView(tag)
+        }
+      })
+    }, 1)  // 这里不设定时器就会有偏移bug
+    this.tagsCount = this.tagsList.length
   }
 }
 </script>

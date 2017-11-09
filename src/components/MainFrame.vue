@@ -73,7 +73,7 @@
     </div>
     <div class="single-page-con" :style="{left: hideMenuText?'60px':'200px'}">
       <div class="single-page">
-        <keep-alive :include="cachePage">
+        <keep-alive :include="cachedPageList">
           <router-view></router-view>
         </keep-alive>
       </div>
@@ -86,7 +86,6 @@
   import tagsPageOpened from './main_components/tagsPageOpened.vue'
   import breadcrumbNav from './main_components/breadcrumbNav.vue'
   // import themeDropdownMenu from './main_components/themeDropdownMenu.vue'
-  import util from '@/libs/util.js'
 
   export default {
     name: 'MainFrame',
@@ -135,17 +134,14 @@
       }
     },
     computed: {
-      tagsList () {
-        return this.$store.state.tagsList  // 所有页面的页面对象
-      },
       pageTagsList () {
-        return this.$store.state.pageOpenedList  // 打开的页面的页面对象
+        return this.$store.state.openedPageList // 打开的页面的页面对象
       },
       menuIconColor () {
         return this.$store.state.menuTheme === 'dark' ? 'white' : '#495060'
       },
-      cachePage () {
-        return this.$store.state.cachePage
+      cachedPageList () {
+        return this.$store.state.cachedPageList
       },
       isFullScreen () {
         return this.$store.state.isFullScreen
@@ -153,13 +149,6 @@
     },
     methods: {
       init () {
-        // this.$store.commit('setCurrentPageName', this.$route.name)
-        // let pathArr = util.setCurrentPath(this, this.$route.name)
-        // if (pathArr.length >= 2) {
-        //   this.$store.commit('addOpenSubmenu', pathArr[1].name)
-        // }
-        // this.userName = Cookies.get('user')
-        // this.checkTag(this.$route.name)
       },
       toggleClick () {
         this.hideMenuText = !this.hideMenuText
@@ -171,102 +160,10 @@
         // DONE full screen
         this.$store.commit('handleFullScreen')
         this.$store.commit('changeFullScreenState')
-      },
-      // lockScreen () {
-      //   let lockScreenBack = document.getElementById('lock_screen_back')
-      //   lockScreenBack.style.transition = 'all 3s'
-      //   lockScreenBack.style.zIndex = 10000
-      //   lockScreenBack.style.boxShadow = '0 0 0 ' + this.lockScreenSize + 'px #667aa6 inset'
-      //   this.showUnlock = true
-      //   this.$store.commit('lock')
-      //   Cookies.set('last_page_name', this.$route.name) // 本地存储锁屏之前打开的页面以便解锁后打开
-      //   setTimeout(() => {
-      //     lockScreenBack.style.transition = 'all 0s'
-      //     this.$router.push({
-      //       name: 'locking'
-      //     })
-      //   }, 800)
-      // },
-      checkTag (name) {
-        let openpageHasTag = this.pageTagsList.some(item => {
-          if (item.name === name) {
-            return true
-          }
-        })
-        if (!openpageHasTag) {  //  解决关闭当前标签后再点击回退按钮会退到当前页时没有标签的问题
-          util.openNewPage(this, name, this.$route.params || {}, this.$route.query || {})
-        }
-      }
-    },
-    watch: {
-      '$route' (to) {
-        this.$store.commit('setCurrentPageName', to.name)
-        let pathArr = util.setCurrentPath(this, to.name)
-        if (pathArr.length > 2) {
-          this.$store.commit('addOpenSubmenu', pathArr[1].name)
-        }
-        this.checkTag(to.name)
-      },
-      lang () {
-        util.setCurrentPath(this, this.$route.name)  // 在切换语言时用于刷新面包屑
       }
     },
     mounted () {
       this.init()
-      // 锁屏相关
-      // let lockScreenBack = document.getElementById('lock_screen_back')
-      // let x = document.body.clientWidth
-      // let y = document.body.clientHeight
-      // let r = Math.sqrt(x * x + y * y)
-      // let size = parseInt(r)
-      // this.lockScreenSize = size
-      // window.addEventListener('resize', () => {
-      //   let x = document.body.clientWidth
-      //   let y = document.body.clientHeight
-      //   let r = Math.sqrt(x * x + y * y)
-      //   let size = parseInt(r)
-      //   this.lockScreenSize = size
-        // lockScreenBack.style.transition = 'all 0s'
-        // lockScreenBack.style.width = lockScreenBack.style.height = size + 'px'
-      // })
-      // lockScreenBack.style.width = lockScreenBack.style.height = size + 'px'
-      // 问候信息相关
-      // if (!Cookies.get('hasGreet')) {
-      //   let now = new Date()
-      //   let hour = now.getHours()
-      //   let greetingWord = {
-      //     title: '',
-      //     words: ''
-      //   }
-      //   let userName = this.userName
-      //   if (hour > 5 && hour < 6) {
-      //     greetingWord = {title: '凌晨好~' + userName, words: '早起的鸟儿有虫吃~'}
-      //   } else if (hour >= 6 && hour < 9) {
-      //     greetingWord = {title: '早上好~' + userName, words: '来一杯咖啡开启美好的一天~'}
-      //   } else if (hour >= 9 && hour < 12) {
-      //     greetingWord = {title: '上午好~' + userName, words: '工作要加油哦~'}
-      //   } else if (hour >= 12 && hour < 14) {
-      //     greetingWord = {title: '中午好~' + userName, words: '午饭要吃饱~'}
-      //   } else if (hour >= 14 && hour < 17) {
-      //     greetingWord = {title: '下午好~' + userName, words: '下午也要活力满满哦~'}
-      //   } else if (hour >= 17 && hour < 19) {
-      //     greetingWord = {title: '傍晚好~' + userName, words: '下班没事问候下爸妈吧~'}
-      //   } else if (hour >= 19 && hour < 21) {
-      //     greetingWord = {title: '晚上好~' + userName, words: '工作之余品一品书香吧~'}
-      //   } else {
-      //     greetingWord = {title: '深夜好~' + userName, words: '夜深了，注意休息哦~'}
-      //   }
-      //   this.$Notice.config({
-      //     top: 130
-      //   })
-      //   this.$Notice.info({
-      //     title: greetingWord.title,
-      //     desc: greetingWord.words,
-      //     duration: 4,
-      //     name: 'greeting'
-      //   })
-      //   Cookies.set('hasGreet', 1)
-      // }
     },
     created () {
       // 查找当前用户之前登录时设置的主题
@@ -295,8 +192,6 @@
         let themeLink = document.querySelector('link[name="theme"]')
         themeLink.setAttribute('href', stylesheetPath)
       }
-      // 显示打开的页面的列表
-      this.$store.commit('setOpenedList')
     }
   }
 </script>
