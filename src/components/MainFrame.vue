@@ -71,11 +71,14 @@
         <tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>
       </div>
     </div>
-    <div class="single-page-con" :style="{left: hideMenuText?'60px':'200px'}">
-      <div class="single-page">
+    <div class="single-page-con" :style="{left: hideMenuText?'60px':'200px', padding: '8px'}">
+      <div class="single-page" :style="{height: single_page_height}">
         <keep-alive :include="cachedPageList">
           <router-view></router-view>
         </keep-alive>
+      </div>
+      <div class="copyright-line">
+        <slot name="copyright"><span>版权信息</span></slot>
       </div>
     </div>
   </div>
@@ -130,7 +133,8 @@
         currentPageName: '',
         hideMenuText: false,
         showFullScreenBtn: window.navigator.userAgent.indexOf('MSIE') < 0,
-        lockScreenSize: 0
+        lockScreenSize: 0,
+        single_page_height: ''
       }
     },
     computed: {
@@ -149,6 +153,7 @@
     },
     methods: {
       init () {
+        this.handleResize()
       },
       toggleClick () {
         this.hideMenuText = !this.hideMenuText
@@ -160,12 +165,22 @@
         // DONE full screen
         this.$store.commit('handleFullScreen')
         this.$store.commit('changeFullScreenState')
+      },
+      handleResize () {
+        let bodyHeight = document.body.clientHeight
+        bodyHeight = bodyHeight < 600 ? 600 : bodyHeight
+        let spHeight = bodyHeight - 156
+        this.single_page_height = `${spHeight}px`
       }
     },
     mounted () {
       this.init()
     },
+    beforeDestroy () {
+      window.removeEventListener('resize', this.handleResize)
+    },
     created () {
+      window.addEventListener('resize', this.handleResize)
       // 查找当前用户之前登录时设置的主题
       let name = this.userDropdown.userName
       if (localStorage.theme) {
