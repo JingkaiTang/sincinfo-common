@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     closePage (event, name) {
+      this.$store.commit('closePage', {vm: this, name: name})
     },
     linkTo (item) {
       const route = {

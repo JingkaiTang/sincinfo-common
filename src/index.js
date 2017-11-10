@@ -67,9 +67,13 @@ const store = {
         this.commit('saveCachedPageList')
       }
     },
-    closePage (state, name) {
+    closePage (state, arg) {
+      const vm = arg.vm
+      const name = arg.name
+      let currentIndex = 0
       state.openedPageList.forEach((item, index) => {
         if (item.name === name) {
+          currentIndex = index
           state.openedPageList.splice(index, 1)
         }
       })
@@ -80,6 +84,13 @@ const store = {
         }
       })
       this.commit('saveCachedPageList')
+      if (vm.$route.name === name) {
+        if (state.openedPageList.length === 0) {
+          vm.$router.push('/')
+        } else {
+          this.commit('openPage', state.openedPageList[currentIndex])
+        }
+      }
     },
     clearAllTags (state, vm) {
       state.openedPageList = []
