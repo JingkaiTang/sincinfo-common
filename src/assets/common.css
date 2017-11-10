@@ -25,6 +25,12 @@ body {
   color: #2b85e4;
 }
 
+/* 覆盖iview按钮高度 */
+.ivu-btn {
+  height: 28px;
+  line-height: 14px;
+}
+
 /**
  * 按钮行样式
  * 按钮行需占满主体页面的一行
