@@ -124,3 +124,14 @@ body {
 .unclickable {
   cursor: default;
 }
+
+/* 各区域的行间距 */
+.gap_area{
+  margin-top: 10px;
+}
+
+/* 各区域的行间距 网上报名的配置，右侧的body距离左侧10px*/
+.gap_area_online{
+  margin-top: 10px;
+  margin-left: 10px;
+}
