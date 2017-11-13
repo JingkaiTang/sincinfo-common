@@ -2,10 +2,12 @@ import './assets/common.css'
 
 import MainFrame from './components/MainFrame'
 import GapButtonGroup from './components/GapButtonGroup'
+import MceView from './components/MceView'
 
 const SincinfoCommon = {
   MainFrame,
-  GapButtonGroup
+  GapButtonGroup,
+  MceView
 }
 
 const install = (Vue, opts = {}) => {
