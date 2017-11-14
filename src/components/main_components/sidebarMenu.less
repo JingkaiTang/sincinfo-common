@@ -1,0 +1,61 @@
+.sc-sidebar-menu {
+  color: #eeeeee;
+  background-color: #495060;
+}
+.sc-menu-item {
+  cursor: pointer;
+  padding-right: 12px;
+  &-l1 {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    font-size: 15px;
+  }
+  &-l2 {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 24px;
+    font-size: 14px;
+  }
+  &-l3 {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 36px;
+    font-size: 13px;
+  }
+  &-l4 {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 48px;
+    font-size: 13px;
+  }
+  &-active {
+    background-color: #1b7ade;
+    color: #fff;
+    &-parent {
+      border-right: 4px solid #2d8cf0;
+    }
+  }
+}
+.sc-menu-arrow {
+  float: right;
+  margin-right: 12px;
+}
+.sc-sub-menu {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .3s ease-in-out;
+  &-open {
+    max-height: 1000px;
+    transition: max-height .5s ease-in-out;
+  }
+  &-l1 {
+    background-color: #363e4f;
+  }
+  &-l2 {
+    background-color: #2e3647;
+  }
+  &-l3 {
+    background-color: #262e3f;
+  }
+}
