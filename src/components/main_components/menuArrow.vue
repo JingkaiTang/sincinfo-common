@@ -1,6 +1,5 @@
 <template>
-  <Icon v-if="open" type="ios-arrow-up"></Icon>
-  <Icon v-else type="ios-arrow-down"></Icon>
+  <Icon type="ios-arrow-down" :class="['arrow', {'arrow-up': open}]"></Icon>
 </template>
 
 <script>
@@ -14,3 +13,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.arrow-up {
+  transform: rotate(180deg);
+}
+
+.arrow {
+  transition: transform .2s ease-in-out;
+}
+</style>

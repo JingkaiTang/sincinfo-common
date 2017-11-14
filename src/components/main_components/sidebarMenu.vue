@@ -1,34 +1,34 @@
 <template>
   <div class="sc-sidebar-menu">
     <div v-for="(l1, i1) in menuList">
-      <div :class="['sc-menu-item', 'sc-menu-item-l1', {'sc-menu-item-active': i1 === active.l1}]" @click="menuClick(l1, {l1: i1})">
+      <div :class="['sc-menu-item', 'sc-menu-item-l1', {'sc-menu-item-active': i1 === active.l1 && active.l2 === -1, 'sc-menu-item-active-parent': i1 === active.l1 && l1.children && l1.children.length && active.l2 >= 0}]" @click="menuClick(l1, {l1: i1})">
         <Icon :type="l1.icon"></Icon>
         <span class="sc-menu-text">l1: {{l1.name}}</span>
-        <MenuArrow v-if="l1.children && l1.children.length > 0" :open="l1.$subOpen" @click="toggleSubmenu(l1)"></MenuArrow>
+        <MenuArrow v-if="l1.children && l1.children.length > 0" class="sc-menu-arrow" :open="l1.$subOpen" @click.stop="toggleSubmenu(l1)"></MenuArrow>
       </div>
-      <div v-if="l1.children && l1.children.length > 0" v-show="l1.$subOpen">
-        <div v-for="(l2, i2) in l1.children">
-          <div :class="['sc-menu-item', 'sc-menu-item-l2', {'sc-menu-item-active': i2 === active.l2}]" @click="menuClick(l2, {l1: i1, l2: i2})">
+      <div v-if="l1.children && l1.children.length > 0" :class="['sc-sub-menu', 'sc-sub-menu-l1', {'sc-sub-menu-open': l1.$subOpen}]" v-show="l1.$subOpen">
+        <template v-for="(l2, i2) in l1.children">
+          <div :class="['sc-menu-item', 'sc-menu-item-l2', {'sc-menu-item-active': i1 === active.l1 && i2 === active.l2 && active.l3 === -1, 'sc-menu-item-active-parent': i1 === active.l1 && i2 === active.l2 && l2.children && l2.children.length && active.l3 >= 0}]" @click="menuClick(l2, {l1: i1, l2: i2})">
             <Icon :type="l2.icon"></Icon>
             <span class="sc-menu-text">l2: {{l2.name}}</span>
-            <MenuArrow v-if="l2.children && l2.children.length > 0" :open="l2.$subOpen" @click="toggleSubmenu(l2)"></MenuArrow>
+            <MenuArrow v-if="l2.children && l2.children.length > 0" class="sc-menu-arrow" :open="l2.$subOpen" @click.stop="toggleSubmenu(l2)"></MenuArrow>
           </div>
-          <div v-if="l2.children && l2.children.length > 0" v-show="l2.$subOpen">
-            <div v-for="(l3, i3) in l2.children">
-              <div :class="['sc-menu-item', 'sc-menu-item-l3', {'sc-menu-item-active': i3 === active.l3}]" @click="menuClick(l3, {l1: i1, l2: i2, l3: i3})">
+          <div v-if="l2.children && l2.children.length > 0" :class="['sc-sub-menu', 'sc-sub-menu-l2', {'sc-sub-menu-open': l2.$subOpen}]" v-show="l2.$subOpen">
+            <template v-for="(l3, i3) in l2.children">
+              <div :class="['sc-menu-item', 'sc-menu-item-l3', {'sc-menu-item-active': i1 === active.l1 && i2 === active.l2 && i3 === active.l3 && active.l4 === -1, 'sc-menu-item-active-parent': i1 === active.l1 && i2 === active.l2 && i3 === active.l3 && l3.children && l3.children.length && active.l4 >= 0}]" @click="menuClick(l3, {l1: i1, l2: i2, l3: i3})">
                 <span class="sc-menu-text">l3: {{l3.name}}</span>
-                <MenuArrow v-if="l3.children && l3.children.length > 0" :open="l3.$subOpen" @click="toggleSubmenu(l3)"></MenuArrow>
+                <MenuArrow v-if="l3.children && l3.children.length > 0" class="sc-menu-arrow" :open="l3.$subOpen" @click.stop="toggleSubmenu(l3)"></MenuArrow>
               </div>
-              <div v-if="l3.children && l3.children.length > 0" v-show="l3.$subOpen">
-                <div v-for="(l4, i4) in l3.children">
-                  <div :class="['sc-menu-item', 'sc-menu-item-l4', {'sc-menu-item-active': i4 === active.l4}]" @click="menuClick(l4, {l1: i1, l2: i2, l3: i3, l4: i4})">
+              <div v-if="l3.children && l3.children.length > 0" :class="['sc-sub-menu', 'sc-sub-menu-l3', {'sc-sub-menu-open': l3.$subOpen}]" v-show="l3.$subOpen">
+                <template v-for="(l4, i4) in l3.children">
+                  <div :class="['sc-menu-item', 'sc-menu-item-l4', {'sc-menu-item-active': i1 === active.l1 && i2 === active.l2 && i3 === active.l3 && i4 === active.l4}]" @click="menuClick(l4, {l1: i1, l2: i2, l3: i3, l4: i4})">
                     <span class="sc-menu-text">l4: {{l4.name}}</span>
                   </div>
-                </div>
+                </template>
               </div>
-            </div>
+            </template>
           </div>
-        </div>
+        </template>
       </div>
     </div>
   </div>
@@ -67,15 +67,18 @@ export default {
         if (l1.children) {
           this.$set(l1, '$subOpen', false)
           l1.children.forEach((l2, i2) => {
+            this.$set(l2, '$parent', l1)
             this.$set(l2, '$active', {l1: i1, l2: i2})
             Util.checkIcon(l2)
             if (l2.children) {
               this.$set(l2, '$subOpen', false)
               l2.children.forEach((l3, i3) => {
+                this.$set(l3, '$parent', l2)
                 this.$set(l3, '$active', {l1: i1, l2: i2, l3: i3})
                 if (l3.children) {
                   this.$set(l3, '$subOpen', false)
                   l3.children.forEach((l4, i4) => {
+                    this.$set(l4, '$parent', l3)
                     this.$set(l4, '$active', {l1: i1, l2: i2, l3: i3, l4: i4})
                   })
                 }
@@ -86,9 +89,12 @@ export default {
       })
     },
     menuClick (menu, active) {
-      this.toggleSubmenu(menu)
+      if (menu.children && menu.children.length > 0) {
+        this.toggleSubmenu(menu)
+      }
       if (menu.route) {
         this.$router.push({name: menu.route})
+        this.applyActive(menu.$active)
       }
     },
     toggleSubmenu (menu) {
