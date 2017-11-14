@@ -8,7 +8,7 @@ import Calendar from './components/calendar'
 const SincinfoCommon = {
   MainFrame,
   GapButtonGroup,
-  MceView
+  MceView,
   Calendar
 }
 
