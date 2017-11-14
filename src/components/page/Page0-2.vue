@@ -1,30 +1,23 @@
 <template>
-<div>
+
   <div>
-      <MceView  v-model="content"></MceView>
+    <h1>Page0-2</h1>
+    <Calendar border :events="calendar.events"></Calendar>
   </div>
 
-  <Input type="text" v-model="inputText"></Input>
-  <Button @click="gets">Get</Button>
-  <Button @click="sets">Set</Button>
-
-</div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      content: '',
-      inputText: ''
-    }
-  },
-  methods: {
-    gets: function () {
-      console.log('content:', this.content)
-    },
-    sets: function () {
-      this.content = this.inputText
+
+      calendar: {
+        events: {
+          '2017-10-7': ['事件一', '事件二', '事件三'],
+          '2017-10-30': ['赴北京开会', '全聚德吃烤鸭']
+        }
+      }
     }
   }
 }
