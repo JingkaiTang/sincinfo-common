@@ -42,11 +42,11 @@ export default {
       mode: 'exact',
       selector: '#tinymceEditer',
       theme: 'modern',
-      language_url: '/static/langs/zh_CN.GB2312.js',
+      language_url: 'http://ozefqhgx0.bkt.clouddn.com/langs/zh_CN.GB2312.js',
       branding: false,
       elementpath: false,
       menubar: 'edit insert view format table tools',
-      skin_url: '/static/skins/lightgray',
+      skin_url: 'http://ozefqhgx0.bkt.clouddn.com/skins/lightgray',
       width: 800,
       height: 400,
       cleanup: false,
@@ -68,7 +68,7 @@ export default {
           that.$emit('input', tinymce.get('tinymceEditer').getContent())
         })
       },
-      content_css: ['/static/css/mce.css']
+      content_css: ['http://ozefqhgx0.bkt.clouddn.com/css/mce.css']
     })
   },
   destroyed () {
