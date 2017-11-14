@@ -2,10 +2,12 @@ import './assets/common.css'
 
 import MainFrame from './components/MainFrame'
 import GapButtonGroup from './components/GapButtonGroup'
+import Calendar from './components/calendar'
 
 const SincinfoCommon = {
   MainFrame,
-  GapButtonGroup
+  GapButtonGroup,
+  Calendar
 }
 
 const install = (Vue, opts = {}) => {
