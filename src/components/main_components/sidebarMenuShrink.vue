@@ -5,6 +5,10 @@
     width: 54px;
     margin-right: 6px;
   }
+  &-sub {
+    display: inline-block;
+    width: 148px;
+  }
 }
 </style>
 
@@ -19,20 +23,20 @@
           <template v-for="(l2, i2) in l1.children">
             <Dropdown class="sc-menu-shrink" v-if="l2.children && l2.children.length > 0" placement="right-start" :key="i2">
               <DropdownItem :name="l2.route">
-                <div @click="menuClick(l2.route)">
+                <div class="sc-menu-shrink-sub" @click="menuClick(l2.route)">
                   <Icon :type="l2.icon"></Icon>
                   <span>{{ l2.name }}</span>
-                  <Icon type="ios-arrow-right"></Icon>
                 </div>
+                <Icon type="ios-arrow-right"></Icon>
               </DropdownItem>
               <DropdownMenu class="sc-menu-shrink sc-menu-shrink-l3" slot="list">
                 <template v-for="(l3, i3) in l2.children">
                   <Dropdown class="sc-menu-shrink" v-if="l3.children && l3.children.length > 0" placement="right-start" :key="i3">
                     <DropdownItem :name="l3.route">
-                      <div @click="menuClick(l3.route)">
+                      <div class="sc-menu-shrink-sub" @click="menuClick(l3.route)">
                         <span>{{ l3.name }}</span>
-                        <Icon type="ios-arrow-right"></Icon>
                       </div>
+                      <Icon type="ios-arrow-right"></Icon>
                     </DropdownItem>
                     <DropdownMenu class="sc-menu-shrink sc-menu-shrink-l4" slot="list">
                       <template v-for="(l4, i4) in l3.children">
