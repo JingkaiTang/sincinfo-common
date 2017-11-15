@@ -37,7 +37,7 @@
         </tr>
       </thead>
       <tr v-for="(day,k1) in days">
-        <td v-for="(child,k2) in day" :class="{'selected':child.selected,'disabled':child.disabled}" @click="select(k1,k2,$event); debug(child);">
+        <td v-for="(child,k2) in day" :class="{'selected':child.selected,'disabled':child.disabled}" @click="clicked(k1,k2);select(k1,k2,$event); debug(child);">
           <Badge dot :count="(!!child.events && child.events.length > 0) ? child.events.length : '0'">
             <Tooltip placement="top" transfer :disabled="!(!!child.events && child.events.length > 0)">
               <span :class="{'red':k2===0||k2===6||((child.isLunarFestival||child.isGregorianFestival) && lunar)}">{{child.day}}</span>
@@ -114,8 +114,7 @@ export default {
     },
     onDayClick: {
       type: Function,
-      default: (day) => {
-        console.log(day)
+      default: () => {
       }
     }
   },
@@ -434,12 +433,13 @@ export default {
         this.today = [k1, k2]
         this.$emit('select', [this.year, this.zero ? this.zeroPad(this.month + 1) : this.month + 1, this.zero ? this.zeroPad(this.days[k1][k2].day) : this.days[k1][k2].day])
       }
-      console.log('come here la ')
-      this.onDayClick(this.year + '-' + (this.month + 1) + '-' + this.zeroPad(this.days[k1][k2].day), this.days[k1][k2].events)
     },
     // 日期补零
     zeroPad (n) {
       return String(n < 10 ? '0' + n : n)
+    },
+    clicked (k1, k2) {
+      this.onDayClick(this.year + '-' + (this.month + 1) + '-' + this.zeroPad(this.days[k1][k2].day), this.days[k1][k2].events)
     }
   }
 }
