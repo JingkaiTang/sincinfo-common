@@ -1,6 +1,6 @@
 {
   "name": "sincinfo-common",
-  "version": "0.0.19",
+  "version": "0.0.22",
   "description": "Common conponents, styles etc for sincinfo",
   "author": "Jingkai Tang <jingkaitang@qq.com>",
   "main": "dist/sincinfo-common.js",
@@ -14,7 +14,8 @@
   "dependencies": {
     "axios": "^0.17.0",
     "js-cookie": "^2.2.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "tinymce": "^4.7.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

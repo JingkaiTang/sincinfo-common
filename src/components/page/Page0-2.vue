@@ -1,14 +1,17 @@
 <template>
+
   <div>
     <h1>Page0-2</h1>
     <Calendar border :events="calendar.events"></Calendar>
   </div>
+
 </template>
 
 <script>
 export default {
   data () {
     return {
+
       calendar: {
         events: [
           {

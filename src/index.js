@@ -2,11 +2,13 @@ import './assets/common.css'
 
 import MainFrame from './components/MainFrame'
 import GapButtonGroup from './components/GapButtonGroup'
+import MceView from './components/MceView'
 import Calendar from './components/calendar'
 
 const SincinfoCommon = {
   MainFrame,
   GapButtonGroup,
+  MceView,
   Calendar
 }
 
