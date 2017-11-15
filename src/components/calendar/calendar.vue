@@ -37,12 +37,12 @@
         </tr>
       </thead>
       <tr v-for="(day,k1) in days">
-        <td v-for="(child,k2) in day" :class="{'selected':child.selected,'disabled':child.disabled}" @click="select(k1,k2,$event); debug(child);">
+        <td v-for="(child,k2) in day" :class="{'selected':child.selected,'disabled':child.disabled}" @click="clicked(k1,k2);select(k1,k2,$event); debug(child);">
           <Badge dot :count="(!!child.events && child.events.length > 0) ? child.events.length : '0'">
             <Tooltip placement="top" transfer :disabled="!(!!child.events && child.events.length > 0)">
               <span :class="{'red':k2===0||k2===6||((child.isLunarFestival||child.isGregorianFestival) && lunar)}">{{child.day}}</span>
               <div class="events" slot="content">
-                <div v-for="event in child.events">{{event}}</div>
+                <div v-for="event in child.events">{{event.content}}</div>
               </div>
             </Tooltip>
             <!-- <div class="text" v-if="child.eventName!==undefined">{{child.eventName}}</div> -->
@@ -51,6 +51,7 @@
         </td>
       </tr>
     </table>
+
   </div>
 
 
@@ -106,9 +107,14 @@ export default {
       }
     },
     events: {
-      type: Object,
+      type: Array,
       default: function () {
         return {}
+      }
+    },
+    onDayClick: {
+      type: Function,
+      default: () => {
       }
     }
   },
@@ -341,12 +347,16 @@ export default {
     // 获取自定义事件
     getEvents (y, m, d) {
       if (Object.keys(this.events).length === 0) return false
-      if (this.events[y + '-' + m + '-' + d] !== undefined) {
-        return {
-          events: this.events[y + '-' + m + '-' + d]
+      for (let temp in this.events) {
+        if (this.events[temp].date === y + '-' + m + '-' + d) {
+          return {
+            events: this.events[temp].events
+          }
         }
       }
-      return {}
+      return {
+        events: []
+      }
     },
     // 上月
     prev (e) {
@@ -427,6 +437,9 @@ export default {
     // 日期补零
     zeroPad (n) {
       return String(n < 10 ? '0' + n : n)
+    },
+    clicked (k1, k2) {
+      this.onDayClick(this.year + '-' + (this.month + 1) + '-' + this.zeroPad(this.days[k1][k2].day), this.days[k1][k2].events)
     }
   }
 }
