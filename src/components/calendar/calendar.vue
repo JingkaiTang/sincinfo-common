@@ -51,25 +51,7 @@
         </td>
       </tr>
     </table>
-    <div>
-      <Modal v-model="showEventsModal" ok-text="添加日程" cancel-text="关闭" @on-ok="addEventModal = true"  :title="`${addEvents.day}日程`">
-          <Table :columns="eventTable" :data="addEvents.events" ></Table>
-      </Modal>
-      <Modal v-model="addEventModal" ok-text="添加" @on-ok="addEvent" :title="`添加${addEvents.day}日程`">
-        <Row>
-          <Col span="18">
-            <Form :label-width="120">
-              <FormItem label="时间">
-                <TimePicker format="HH:mm" placeholder="Select time" @on-change="onChange" style="width: 250px"></TimePicker>
-              </FormItem>
-              <FormItem label="事件">
-                <Input type="text" v-model="myEvent.content" style="width: 250px"></Input>
-              </FormItem>
-            </Form>
-          </Col>
-        </Row>
-      </Modal>
-    </div>
+
   </div>
 
 
@@ -129,64 +111,21 @@ export default {
       default: function () {
         return {}
       }
+    },
+    onDayClick: {
+      type: Function,
+      default: (day) => {
+        console.log(day)
+      }
     }
   },
   data () {
     return {
-      showEventsModal: false,
-      addEventModal: false,
       year: 0,
       month: 0,
       day: 0,
       days: [],
       today: [],
-      addEvents: {
-        day: '',
-        events: []
-      },
-      myEvent: {
-        time: '',
-        content: ''
-      },
-      eventTable: [
-        {
-          title: '序号',
-          type: 'index',
-          width: 70,
-          align: 'center'
-        },
-        {
-          title: '事件',
-          key: 'content',
-          align: 'left'
-        },
-        {
-          title: '时间',
-          key: 'time',
-          align: 'left'
-        },
-        {
-          title: '操作',
-          key: 'action',
-          align: 'center',
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
-                props: {
-                  type: 'text',
-                  size: 'small'
-                },
-                on: {
-                  click: () => {
-                    this.addEvents.events.splice(params.index, 1)
-                  }
-                }
-              }, '删除')
-            ]
-            )
-          }
-        }
-      ],
       festival: {
         lunar: {
           '1-1': '春节',
@@ -230,13 +169,6 @@ export default {
   methods: {
     debug (a) {
       // console.log(a)
-    },
-    onChange (time) {
-      this.myEvent.time = time
-    },
-    addEvent () {
-      // TODO 以后需加入与服务器沟通
-      this.addEvents.events.push({time: this.myEvent.time, content: this.myEvent.content})
     },
     // 初始化一些东西
     init () {
@@ -502,9 +434,8 @@ export default {
         this.today = [k1, k2]
         this.$emit('select', [this.year, this.zero ? this.zeroPad(this.month + 1) : this.month + 1, this.zero ? this.zeroPad(this.days[k1][k2].day) : this.days[k1][k2].day])
       }
-      this.addEvents.day = this.year + '-' + (this.month + 1) + '-' + this.zeroPad(this.days[k1][k2].day)
-      this.addEvents.events = this.days[k1][k2].events
-      this.showEventsModal = true
+      console.log('come here la ')
+      this.onDayClick(this.year + '-' + (this.month + 1) + '-' + this.zeroPad(this.days[k1][k2].day), this.days[k1][k2].events)
     },
     // 日期补零
     zeroPad (n) {
