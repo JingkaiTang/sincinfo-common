@@ -21,7 +21,7 @@ util.iconList = [
   'document-text',
   'clipboard',
   'scissors',
-  'funnels',
+  'funnel',
   'bookmark',
   'email'
 ]
