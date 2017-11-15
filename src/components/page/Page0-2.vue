@@ -10,10 +10,42 @@ export default {
   data () {
     return {
       calendar: {
-        events: {
-          '2017-10-7': ['事件一', '事件二', '事件三'],
-          '2017-10-30': ['赴北京开会', '全聚德吃烤鸭']
-        }
+        events: [
+          {
+            date: '2017-11-7',
+            events: [
+              {
+                time: '23:00',
+                content: '事件一'
+              },
+              {
+                time: '23:00',
+                content: '事件二'
+              },
+              {
+                time: '23:00',
+                content: '事件三'
+              }
+            ]
+          },
+          {
+            date: '2017-11-30',
+            events: [
+              {
+                time: '23:00',
+                content: '吃'
+              },
+              {
+                time: '23:00',
+                content: '喝'
+              },
+              {
+                time: '23:00',
+                content: '玩乐'
+              }
+            ]
+          }
+        ]
       }
     }
   }
