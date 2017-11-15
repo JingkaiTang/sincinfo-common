@@ -9,7 +9,7 @@ util.iconList = [
   'heart-broken',
   'gear-a',
   'gear-b',
-  'toggle-fiiled',
+  'toggle-filled',
   'toggle',
   'settings',
   'wrench',
