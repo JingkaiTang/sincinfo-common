@@ -201,7 +201,8 @@ html,body{
     }
   }
   .single-page-con{
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     position: absolute;
     top: 100px;
     right: 0;
@@ -212,8 +213,9 @@ html,body{
     .single-page{
       background-color: #fff;
       padding: 4px;
-      overflow: auto;
-      min-width: 1000px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-width: 984px;
     }
     .copyright-line {
       height: 24px;
@@ -221,7 +223,7 @@ html,body{
       margin-top: 16px;
       background-color: #fff;
       text-align: center;
-      min-width: 1000px;
+      min-width: 984px;
     }
   }
   &-copy{
