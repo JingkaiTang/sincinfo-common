@@ -1,37 +1,5 @@
 <template>
-  <div class="body">
-    <div style="margin-top:5px;">
-      <Form :label-width="100" class="search-group">
-        <Row>
-          <Col span="5">
-            <FormItem label="考场名称">
-              <Input v-model="filter.exam_activity_name"></Input>
-            </FormItem>
-          </Col>
-          <Col span="5">
-            <FormItem label="日期起始">
-              <DatePicker v-model="filter.date_from" type="date" style="width: 100%"></DatePicker>
-            </FormItem>
-          </Col>
-          <Col span="5">
-            <FormItem label="日期结束">
-              <DatePicker v-model="filter.date_to" type="date" style="width: 100%"></DatePicker>
-            </FormItem>
-          </Col>
-        </Row>
-      </Form>
-    </div>
-    <div class="btn-line" style="margin: -10px 0 10px 0;">
-      <Button type="primary" icon="ios-search-strong">查询</Button>
-    </div>
-    <Table :columns="header" :data="exam_list"></Table>
-    <Row type="flex" justify="center" style="margin: 10px 0 10px 0;">
-      <Col>
-        <Page :total="100" show-total show-sizer show-elevator></Page>
-      </Col>
-    </Row>
-    <div class="page-no">No.1004012</div>
-  </div>
+  <Table :columns="header" :data="exam_list"></Table>
 </template>
 
 <script>
@@ -79,11 +47,6 @@ export default {
         }
       ],
       exam_list: [],
-      filter: {
-        exam_activity_name: '',
-        date_from: '',
-        date_to: ''
-      },
       groups: {
         exam_activity_detail: (exam) => {
           return {
@@ -234,7 +197,6 @@ export default {
     }
   },
   methods: {
-
     fakeData () {
       const stages = [
         '意向征询',
