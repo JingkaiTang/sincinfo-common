@@ -50,7 +50,9 @@ export default {
   },
   created () {
     if (this.grid > 0) {
-      this.gridWidth = `width: ${Math.floor(100 / this.grid)}%`
+      let lens = this.group.map(g => g.name.length).sort()
+      let longest = lens[lens.length - 1]
+      this.gridWidth = `width: ${Math.floor(100 / this.grid)}%; min-width: ${longest * 12}px`
     }
   }
 }
