@@ -170,6 +170,16 @@
         let bodyHeight = document.body.clientHeight
         bodyHeight = bodyHeight < 600 ? 600 : bodyHeight
         let spHeight = bodyHeight - 156
+        // 检测 single-page-con 的滚动条 并减小 single-page 的高度
+        // 存在一些问题
+        // let spCon = document.getElementsByClassName('single-page-con')[0]
+        // if (spCon) {
+        //   let ch = spCon.clientHeight
+        //   let sh = spCon.scrollHeight
+        //   if (sh > ch) {
+        //     spHeight -= sh - ch
+        //   }
+        // }
         this.single_page_height = `${spHeight}px`
       }
     },
