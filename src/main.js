@@ -17,7 +17,9 @@ Vue.use(SincinfoCommon)
 // 状态管理
 const store = new Vuex.Store({
   state: {
-    ...ScStore.state
+    ...ScStore.state,
+    mainPageRoute: 'index', // 设定主页路由名称
+    excludedRouteList: ['Page2-2'] // 添加tag例外路由，也可以通过再路由信息的meta中添加`untagged: true`达到相应效果
   },
   mutations: {
     ...ScStore.mutations

@@ -28,6 +28,8 @@ const store = {
   state: {
     openedPageList: [],
     cachedPageList: [],
+    // excludedRouteList: [], // 排除的路由列表 不会被cache和记录到标签, 与路由信息meta.untagged类似
+    // mainPageRoute: '', // 主页路由
     menuTheme: '', // 主题
     theme: '',
     isFullScreen: false,
@@ -36,26 +38,29 @@ const store = {
   mutations: {
     init (state) {
       this.commit('initOpenedPageList')
-      this.commit('initCachedPageList')
       state.inited = true
     },
     initOpenedPageList (state) {
       if (localStorage.openedPageList) {
         state.openedPageList = JSON.parse(localStorage.openedPageList)
       }
-    },
-    initCachedPageList (state) {
-      if (localStorage.cachedPageList) {
-        state.cachedPageList = JSON.parse(localStorage.cachedPageList)
-      }
+      this.commit('updateCachedPageList')
     },
     saveOpenedPageList (state) {
       localStorage.openedPageList = JSON.stringify(state.openedPageList)
+      this.commit('updateCachedPageList')
     },
-    saveCachedPageList (state) {
-      localStorage.cachedPageList = JSON.stringify(state.cachedPageList)
+    updateCachedPageList (state) {
+      state.cachedPageList = state.openedPageList.map(page => page.name)
+    },
+    deleteOpenedPageList (state, index) {
+      state.openedPageList.splice(index, 1)
+      this.commit('saveOpenedPageList')
     },
     openPage (state, route) {
+      if ((state.excludedRouteList && state.excludedRouteList.some(r => r === route.name)) || route.meta.untagged) {
+        return
+      }
       if (!state.openedPageList.some(page => page.name === route.name)) {
         const newPage = {
           name: route.name,
@@ -66,48 +71,14 @@ const store = {
         state.openedPageList.push(newPage)
         this.commit('saveOpenedPageList')
       }
-      if (!state.cachedPageList.some(page => page === route.name)) {
-        state.cachedPageList.push(route.name)
-        this.commit('saveCachedPageList')
-      }
     },
-    closePage (state, arg) {
-      const vm = arg.vm
-      const name = arg.name
-      let currentIndex = 0
-      state.openedPageList.forEach((item, index) => {
-        if (item.name === name) {
-          currentIndex = index
-          state.openedPageList.splice(index, 1)
-        }
-      })
+    clearAllTags (state) {
+      state.openedPageList = state.openedPageList.filter(page => page.name === state.mainPageRoute)
       this.commit('saveOpenedPageList')
-      state.cachedPageList.forEach((item, index) => {
-        if (item === name) {
-          state.cachedPageList.splice(index, 1)
-        }
-      })
-      this.commit('saveCachedPageList')
-      if (vm.$route.name === name) {
-        if (state.openedPageList.length === 0) {
-          vm.$router.push('/')
-        } else {
-          this.commit('openPage', state.openedPageList[currentIndex])
-        }
-      }
     },
-    clearAllTags (state, vm) {
-      state.openedPageList = []
+    clearOtherTags (state, route) {
+      state.openedPageList = state.openedPageList.filter(page => page.name === route.name || page.name === state.mainPageRoute)
       this.commit('saveOpenedPageList')
-      state.cachedPageList = []
-      this.commit('saveCachedPageList')
-      vm.$router.push('/')
-    },
-    clearOtherTags (state, vm) {
-      state.openedPageList = state.openedPageList.filter(page => page.name === vm.$route.name)
-      this.commit('saveOpenedPageList')
-      state.cachedPageList = state.cachedPageList.filter(page => page === vm.$route.name)
-      this.commit('saveCachedPageList')
     },
     changeMenuTheme (state, theme) {
       state.menuTheme = theme
