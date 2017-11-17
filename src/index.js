@@ -4,12 +4,14 @@ import MainFrame from './components/MainFrame'
 import GapButtonGroup from './components/GapButtonGroup'
 import MceView from './components/MceView'
 import Calendar from './components/calendar'
+import DragableTable from './components/DragableTable'
 
 const SincinfoCommon = {
   MainFrame,
   GapButtonGroup,
   MceView,
-  Calendar
+  Calendar,
+  DragableTable
 }
 
 const install = (Vue, opts = {}) => {
