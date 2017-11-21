@@ -6,8 +6,8 @@
   <div class="main-frame" :class="{'main-frame-hide-text': hideMenuText}">
     <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
       <div class="logo-con">
-        <img v-show="!hideMenuText"  src="../assets/images/logo.jpg" key="max-logo" />
-        <img v-show="hideMenuText" src="../assets/images/logo-min.jpg" key="min-logo" />
+        <img v-show="!hideMenuText"  src="../assets/images/logo.png" key="max-logo" />
+        <img v-show="hideMenuText" src="../assets/images/logo-min.png" key="min-logo" />
       </div>
       <sidebar-menu v-if="!hideMenuText" :menuList="menu" :iconSize="14"/>
       <sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menu"/>
