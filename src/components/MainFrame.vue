@@ -165,12 +165,15 @@
         this.recomputePageSize()
         if (localStorage.hideMenuText) {
           this.hideMenuText = JSON.parse(localStorage.hideMenuText)
+          if (this.hideMenuText) {
+            this.toggledHideMenuText = true
+          }
         }
       },
       toggleClick () {
         this.hideMenuText = !this.hideMenuText
         localStorage.hideMenuText = JSON.stringify(this.hideMenuText)
-        this.toggledHideMenuText = true
+        this.toggledHideMenuText = this.hideMenuText
       },
       handleClickUserDropdown (name) {
         this.userDropdown.dropdown.filter(dropdown => dropdown.name === name)[0].action()
