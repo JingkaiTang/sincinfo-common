@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MceView v-model="content"></MceView>
+    <MceView v-model="content" :size = "{width: '600px', height: '300px'}"></MceView>
 
     <br/><br/>
     <Col span="12">
