@@ -5,7 +5,11 @@
 <template>
   <div class="main-frame" :class="{'main-frame-hide-text': hideMenuText}">
     <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
-      <div class="logo-con">
+      <div v-if="logo">
+        <img v-show="!hideMenuText"  :src="logo.max" key="max-logo" />
+        <img v-show="hideMenuText" :src="logo.min" key="min-logo" />
+      </div>
+      <div v-else class="logo-con">
         <img v-show="!hideMenuText"  src="../assets/images/logo-max.png" key="max-logo" />
         <img v-show="hideMenuText" src="../assets/images/logo-min.png" key="min-logo" />
       </div>
@@ -96,6 +100,10 @@
       menu: {
         type: Array,
         default: []
+      },
+      logo: {
+        type: Object | Boolean,
+        default: false
       },
       messageBox: {
         type: Object,
