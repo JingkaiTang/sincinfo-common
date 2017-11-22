@@ -23,10 +23,10 @@
           v-for="(item, index) in pageTagsList"
           ref="tagsPageOpened"
           :key="item.name"
-          :name="item.name"
+          :name="index"
           @on-close="closePage"
           @click.native="linkTo(item)"
-          :closable="true"
+          :closable="item.name !== $store.state.mainPageRoute"
           :color="item.name === $route.name ? 'blue' : 'default'"
         >{{ item.title }}</Tag>
       </transition-group>
@@ -55,8 +55,17 @@ export default {
     }
   },
   methods: {
-    closePage (event, name) {
-      this.$store.commit('closePage', {vm: this, name: name})
+    closePage (event, index) {
+      this.$store.commit('deleteOpenedPageList', index)
+      if (index > 0 && this.pageTagsList.length > 0) {
+        this.$router.push({
+          name: this.pageTagsList[index - 1].name
+        })
+      } else {
+        this.$router.push({
+          name: this.$store.state.mainPageRoute
+        })
+      }
     },
     linkTo (item) {
       const route = {
@@ -89,9 +98,12 @@ export default {
     },
     handleTagsOption (type) {
       if (type === 'clearAll') {
-        this.$store.commit('clearAllTags', this)
+        this.$store.commit('clearAllTags')
+        this.$router.push({
+          name: this.$store.state.mainPageRoute
+        })
       } else {
-        this.$store.commit('clearOtherTags', this)
+        this.$store.commit('clearOtherTags', this.$route)
       }
       this.tagBodyLeft = 0
     },

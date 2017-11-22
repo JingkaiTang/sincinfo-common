@@ -48,6 +48,20 @@ export default [
           {
             name: '测试页面2-1-1',
             route: 'Page2-1-1'
+          },
+          {
+            name: '测试页面2-1-2',
+            route: 'Page2-1-2',
+            children: [
+              {
+                name: '测试页面2-1-2-1',
+                route: 'Page2-1-2-1'
+              },
+              {
+                name: '测试页面2-1-2-2',
+                route: 'Page2-1-2-2'
+              }
+            ]
           }
         ]
       },

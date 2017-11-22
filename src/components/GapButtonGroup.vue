@@ -6,9 +6,9 @@
     </template>
   </div>
   <div v-else class="btn-grid">
-    <div width="100%" v-for="row in rows" class="grid-line">
+    <div v-for="row in rows" class="grid-line" :style="gridLineStyle">
       <template v-for="(col, i) in row">
-        <div class="grid" :style="gridWidth">
+        <div class="grid" :style="gridStyle">
           <Button :type="type" @click="col.action">{{col.name}}</Button>
         </div>
         <span v-if="i != row.length-1" style="color: #d7dde4">|</span>
@@ -22,7 +22,8 @@ export default {
   name: 'GapButtonGroup',
   data () {
     return {
-      gridWidth: ''
+      gridStyle: {},
+      gridLineStyle: {}
     }
   },
   props: {
@@ -50,7 +51,19 @@ export default {
   },
   created () {
     if (this.grid > 0) {
-      this.gridWidth = `width: ${Math.floor(100 / this.grid)}%`
+      let lens = this.group.map(g => g.name.length).sort()
+      let longest = lens[lens.length - 1]
+      let width = Math.floor(100 / this.grid)
+      let minWidth = longest * 12 + 4
+      this.gridStyle = {
+        width: `${width}%`,
+        'min-width': `${minWidth}px`
+      }
+      let lineMinWidth = minWidth * this.grid
+      this.gridLineStyle = {
+        width: '100%',
+        'min-width': `${lineMinWidth}px`
+      }
     }
   }
 }
@@ -64,5 +77,9 @@ export default {
 .grid {
   text-align: center;
   display: inline-block;
+}
+
+.grid-line {
+  display: inline;
 }
 </style>

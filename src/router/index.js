@@ -85,6 +85,46 @@ const _page2$1 = {
   }
 }
 
+const _page2$1$2 = {
+  path: 'Page2-1-2',
+  name: 'Page2-1-2',
+  component: Page21,
+  meta: {
+    name: '测试页面2-1-2',
+    parent: _page2$1
+  }
+}
+
+_page2$1$2.children = [
+  {
+    path: 'Page2-1-2-0',
+    name: 'Page2-1-2-0',
+    component: Page210,
+    meta: {
+      name: '测试页面2-1-2-0',
+      parent: _page2$1$2
+    }
+  },
+  {
+    path: 'Page2-1-2-1',
+    name: 'Page2-1-2-1',
+    component: Page211,
+    meta: {
+      name: '测试页面2-1-2-1',
+      parent: _page2$1$2
+    }
+  },
+  {
+    path: 'Page2-1-2-2',
+    name: 'Page2-1-2-2',
+    component: Page211,
+    meta: {
+      name: '测试页面2-1-2-2',
+      parent: _page2$1$2
+    }
+  }
+]
+
 _page2$1.children = [
   {
     path: 'Page2-1-0',
@@ -103,7 +143,8 @@ _page2$1.children = [
       name: '测试页面2-1-1',
       parent: _page2$1
     }
-  }
+  },
+  _page2$1$2
 ]
 
 _page2.children = [

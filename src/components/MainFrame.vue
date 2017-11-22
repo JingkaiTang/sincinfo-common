@@ -5,9 +5,13 @@
 <template>
   <div class="main-frame" :class="{'main-frame-hide-text': hideMenuText}">
     <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
-      <div class="logo-con">
-        <img v-show="!hideMenuText"  src="../assets/images/logo.jpg" key="max-logo" />
-        <img v-show="hideMenuText" src="../assets/images/logo-min.jpg" key="min-logo" />
+      <div v-if="logo">
+        <img v-show="!hideMenuText"  :src="logo.max" key="max-logo" />
+        <img v-show="hideMenuText" :src="logo.min" key="min-logo" />
+      </div>
+      <div v-else class="logo-con">
+        <img v-show="!hideMenuText"  src="../assets/images/logo-max.png" key="max-logo" />
+        <img v-show="hideMenuText" src="../assets/images/logo-min.png" key="min-logo" />
       </div>
       <sidebar-menu v-if="!hideMenuText" :menuList="menu" :iconSize="14"/>
       <sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menu"/>
@@ -97,6 +101,10 @@
         type: Array,
         default: []
       },
+      logo: {
+        type: Object | Boolean,
+        default: false
+      },
       messageBox: {
         type: Object,
         default: () => {
@@ -170,6 +178,16 @@
         let bodyHeight = document.body.clientHeight
         bodyHeight = bodyHeight < 600 ? 600 : bodyHeight
         let spHeight = bodyHeight - 156
+        // 检测 single-page-con 的滚动条 并减小 single-page 的高度
+        // 存在一些问题
+        // let spCon = document.getElementsByClassName('single-page-con')[0]
+        // if (spCon) {
+        //   let ch = spCon.clientHeight
+        //   let sh = spCon.scrollHeight
+        //   if (sh > ch) {
+        //     spHeight -= sh - ch
+        //   }
+        // }
         this.single_page_height = `${spHeight}px`
       }
     },

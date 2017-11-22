@@ -105,6 +105,13 @@ html,body{
     .navicon-con{
       margin: 6px;
       display: inline-block;
+      .ivu-btn {
+        height: unset;
+        line-height: unset;
+      }
+      .ivu-btn-text {
+        color: unset;
+      }
     }
     .header-middle-con{
       position: absolute;
@@ -194,18 +201,21 @@ html,body{
     }
   }
   .single-page-con{
+    overflow-x: auto;
+    overflow-y: hidden;
     position: absolute;
     top: 100px;
     right: 0;
     bottom: 0;
-    overflow: auto;
     background-color: #F0F0F0;
     z-index: 1;
     transition: left .3s;
     .single-page{
       background-color: #fff;
       padding: 4px;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-width: 984px;
     }
     .copyright-line {
       height: 24px;
@@ -213,6 +223,7 @@ html,body{
       margin-top: 16px;
       background-color: #fff;
       text-align: center;
+      min-width: 984px;
     }
   }
   &-copy{
