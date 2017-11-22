@@ -56,7 +56,9 @@ export default {
   },
   methods: {
     closePage (event, index) {
+      let isCurrentPage = this.$route.name === this.$store.state.openedPageList[index].name
       this.$store.commit('deleteOpenedPageList', index)
+      if (!isCurrentPage) return
       if (index > 0 && this.pageTagsList.length > 0) {
         this.$router.push({
           name: this.pageTagsList[index - 1].name
