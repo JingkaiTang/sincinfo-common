@@ -140,6 +140,7 @@
         spanRight: 20,
         currentPageName: '',
         hideMenuText: false,
+        toggledHideMenuText: false,
         showFullScreenBtn: window.navigator.userAgent.indexOf('MSIE') < 0,
         lockScreenSize: 0,
         single_page_height: ''
@@ -161,10 +162,15 @@
     },
     methods: {
       init () {
-        this.handleResize()
+        this.recomputePageSize()
+        if (localStorage.hideMenuText) {
+          this.hideMenuText = JSON.parse(localStorage.hideMenuText)
+        }
       },
       toggleClick () {
         this.hideMenuText = !this.hideMenuText
+        localStorage.hideMenuText = JSON.stringify(this.hideMenuText)
+        this.toggledHideMenuText = true
       },
       handleClickUserDropdown (name) {
         this.userDropdown.dropdown.filter(dropdown => dropdown.name === name)[0].action()
@@ -174,7 +180,7 @@
         this.$store.commit('handleFullScreen')
         this.$store.commit('changeFullScreenState')
       },
-      handleResize () {
+      recomputePageSize () {
         let bodyHeight = document.body.clientHeight
         bodyHeight = bodyHeight < 600 ? 600 : bodyHeight
         let spHeight = bodyHeight - 156
@@ -189,6 +195,13 @@
         //   }
         // }
         this.single_page_height = `${spHeight}px`
+      },
+      handleResize () {
+        this.recomputePageSize()
+        if (!this.toggledHideMenuText) {
+          this.hideMenuText = document.body.clientWidth < 1400
+          localStorage.hideMenuText = JSON.stringify(this.hideMenuText)
+        }
       }
     },
     mounted () {
