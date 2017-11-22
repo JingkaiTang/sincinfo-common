@@ -1,6 +1,6 @@
 {
   "name": "sincinfo-common",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Common conponents, styles etc for sincinfo",
   "author": "Jingkai Tang <jingkaitang@qq.com>",
   "main": "dist/sincinfo-common.js",
