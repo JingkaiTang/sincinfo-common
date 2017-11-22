@@ -30,7 +30,7 @@ import 'tinymce/plugins/textpattern'
 import 'tinymce/plugins/textcolor'
 import 'tinymce/plugins/paste'
 export default {
-  props: ['value'],
+  props: ['value', 'size'],
   watch: {
     value: function () {
       tinymce.get('tinymceEditer').setContent(this.value)
@@ -38,6 +38,7 @@ export default {
   },
   mounted () {
     const that = this
+    console.log('size', this.size)
     tinymce.init({
       mode: 'exact',
       selector: '#tinymceEditer',
@@ -47,8 +48,8 @@ export default {
       elementpath: false,
       menubar: 'edit insert view format table tools',
       skin_url: 'http://ozefqhgx0.bkt.clouddn.com/skins/lightgray',
-      width: 800,
-      height: 400,
+      width: this.size.width,
+      height: this.size.height,
       cleanup: false,
       plugins: [
         'advlist autolink lists link image charmap print preview hr anchor imagetools',
