@@ -152,12 +152,45 @@ router.beforeEach((to, from, next) => {
 ```
 - grid 一行显示的格子数
 
-
 ## Calendar
 ### 支持的属性
+- events 事件数组
+```
+[
+  {
+    date: '2017-11-11', // 事件发生的日期
+    events: [
+      {
+        time: '11:11', // 事件发生的时间
+        content: 'blablabla' // 事件描述
+      },
+      ...
+    ]
+  },
+  ...
+]
+```
+- onDayClick 响应点击事件
+```
+(day, events) => { // day 日期
+  // ...
+}
+```
 
 ## DragableTable
 ### 支持的属性
+- refs 引用名
+- columnsList 同iview中Table的columns
+- tableData 同iview中Table的data
+- start 开始拖动时响应的函数
+- end 结束拖动时响应的函数
+- choose 选中时响应的函数
+```
+// start/end/choose的函数签名同为，el为选中的元素的一个事件包装，详见Sortable.js
+(el) => {}
+```
 
 ## MceView
 ### 支持的属性
+- 支持`v-model`绑定富文本内容
+- size 富文本编辑器的大小
