@@ -5,15 +5,15 @@
 <template>
   <div class="main-frame" :class="{'main-frame-hide-text': hideMenuText}">
     <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
-      <div v-if="logo">
+      <div v-if="logo" class="logo-con" @click="toMainPage">
         <img v-show="!hideMenuText"  :src="logo.max" key="max-logo" />
         <img v-show="hideMenuText" :src="logo.min" key="min-logo" />
       </div>
-      <div v-else class="logo-con">
+      <div v-else class="logo-con" @click="toMainPage">
         <img v-show="!hideMenuText"  src="../assets/images/logo-max.png" key="max-logo" />
         <img v-show="hideMenuText" src="../assets/images/logo-min.png" key="min-logo" />
       </div>
-      <sidebar-menu v-if="!hideMenuText" :menuList="menu" :iconSize="14"/>
+      <sidebar-menu ref="sidebarMenu" v-if="!hideMenuText" :menuList="menu" :iconSize="14"/>
       <sidebar-menu-shrink :icon-color="menuIconColor" v-else :menuList="menu"/>
     </div>
     <div class="main-frame-header-con" :style="{paddingLeft: hideMenuText?'60px':'200px'}">
@@ -167,6 +167,14 @@
           this.hideMenuText = JSON.parse(localStorage.hideMenuText)
           if (this.hideMenuText) {
             this.toggledHideMenuText = true
+          }
+        }
+      },
+      toMainPage () {
+        if (this.$store.state.mainPageRoute) {
+          this.$router.push({name: this.$store.state.mainPageRoute})
+          if (this.$refs.sidebarMenu) {
+            this.$refs.sidebarMenu.updateActiveMenu()
           }
         }
       },
