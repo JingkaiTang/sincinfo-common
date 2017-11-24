@@ -82,13 +82,16 @@ router.beforeEach((to, from, next) => {
 ### 支持的属性
 - menu 详见下文
 - logo 自定义logo 可选
+
 ```
 {
   max: 'url to max logo',
   min: 'url to min logo'
 }
 ```
+
 - messageBox 消息按钮
+
 ```
 {
   show: true, // 显示该按钮
@@ -96,7 +99,9 @@ router.beforeEach((to, from, next) => {
   count: 12 // 消息计数
 }
 ```
+
 - userDropdown 用户头像及下拉菜单
+
 ```
 {
   username: 'User name',
@@ -114,6 +119,7 @@ router.beforeEach((to, from, next) => {
 样例参见menu/index.js
 
 标准格式
+
 ```
 {
   name: 'MenuName', // 菜单显示的名字 必选
@@ -127,6 +133,7 @@ router.beforeEach((to, from, next) => {
 样例参见路由信息定义router/index.js
 
 标准格式 路由单元
+
 ```
 {
   ..., // 其他路由信息
@@ -141,6 +148,7 @@ router.beforeEach((to, from, next) => {
 ## GapButtonGroup
 ### 支持的属性
 - group
+
 ```
 [
   {
@@ -150,11 +158,13 @@ router.beforeEach((to, from, next) => {
   ...
 ]
 ```
+
 - grid 一行显示的格子数
 
 ## Calendar
 ### 支持的属性
 - events 事件数组
+
 ```
 [
   {
@@ -170,7 +180,9 @@ router.beforeEach((to, from, next) => {
   ...
 ]
 ```
+
 - onDayClick 响应点击事件
+
 ```
 (day, events) => { // day 日期
   // ...
@@ -185,6 +197,7 @@ router.beforeEach((to, from, next) => {
 - start 开始拖动时响应的函数
 - end 结束拖动时响应的函数
 - choose 选中时响应的函数
+
 ```
 // start/end/choose的函数签名同为，el为选中的元素的一个事件包装，详见Sortable.js
 (el) => {}
