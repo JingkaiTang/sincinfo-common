@@ -55,9 +55,107 @@ html,body{
     z-index: 20;
     box-shadow: 0 2px 1px 1px rgba(100,100,100,.1);
     transition: padding .3s;
-  }
-  &-breadcrumb{
-    padding: 8px 15px 0;
+    .main-frame-header{
+      height: 60px;
+      background: #fff;
+      box-shadow: 0 2px 1px 1px rgba(100,100,100,.1);
+      &-left{
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        display: inline-block;
+        background-color: red;
+        .navicon-con{
+          display: inline-block;
+          margin: 0 0;
+          .ivu-btn {
+            height: unset;
+            line-height: unset;
+          }
+          .ivu-btn-text {
+            color: unset;
+          }
+        }
+        .breadcrumb-con{
+          display: inline-block;
+        }
+      }
+      &-right{
+        display: inline-block;
+        float: right;
+        background-color: green;
+        .more-info-con{
+          display: inline-block;
+        }
+        .icon-btn-con{
+          display: inline-block;
+          .switch-theme-con{
+            display: inline-block;
+            width: 40px;
+            height: 100%;
+          }
+          .message-con{
+            display: inline-block;
+            width: 30px;
+            padding: 18px 0;
+            text-align: center;
+            cursor: pointer;
+            i{
+              vertical-align: middle;
+            }
+          }
+          .change-skin{
+            font-size: 14px;
+            font-weight: 500;
+            padding-right: 5px;
+          }
+          .switch-theme{
+            height: 100%;
+          }
+          .full-screen-btn-con{
+            display: inline-block;
+            width: 30px;
+            padding: 18px 0;
+            text-align: center;
+            cursor: pointer;
+            i{
+              vertical-align: middle;
+            }
+          }
+          .lock-screen-btn-con{
+            display: inline-block;
+            width: 30px;
+            padding: 18px 0;
+            text-align: center;
+            cursor: pointer;
+            i{
+              vertical-align: middle;
+            }
+          }
+        }
+        .user-dropdown{
+          &-menu-con{
+            display: inline-block;
+            width: 150px;
+            height: 100%;
+            .main-user-name{
+              display: inline-block;
+              width: 80px;
+              word-break: keep-all;
+              white-space: nowrap;
+              vertical-align: middle;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: right;
+            }
+          }
+          &-innercon{
+            height: 100%;
+            padding-right: 14px;
+          }
+        }
+      }
+    }
   }
   &-menu-left{
     background: #464c5b;
@@ -96,6 +194,7 @@ html,body{
       }
     }
   }
+<<<<<<< current
   &-header{
     height: 60px;
     background: #fff;
@@ -210,6 +309,8 @@ html,body{
       }
     }
   }
+=======
+>>>>>>> before discard
   .single-page-con{
     overflow-x: auto;
     overflow-y: hidden;
@@ -228,8 +329,6 @@ html,body{
       min-width: 984px;
     }
     .copyright-line {
-      height: 24px;
-      line-height: 24px;
       margin-top: 16px;
       background-color: #fff;
       text-align: center;

@@ -87,7 +87,10 @@
         </keep-alive>
       </div>
       <div class="copyright-line">
-        <slot name="copyright"><span>版权信息</span></slot>
+        <slot name="copyright">
+          <div><span>版权信息</span></div>
+          <div><span>:)</span></div>
+        </slot>
       </div>
     </div>
   </div>
@@ -199,7 +202,9 @@
       recomputePageSize () {
         let bodyHeight = document.body.clientHeight
         bodyHeight = bodyHeight < 600 ? 600 : bodyHeight
-        let spHeight = bodyHeight - 156
+        let cl = document.getElementsByClassName('copyright-line')[0]
+        let clHeight = cl ? cl.clientHeight : 24
+        let spHeight = bodyHeight - 132 - clHeight
         // 检测 single-page-con 的滚动条 并减小 single-page 的高度
         // 存在一些问题
         // let spCon = document.getElementsByClassName('single-page-con')[0]
