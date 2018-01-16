@@ -123,14 +123,19 @@ html,body{
       overflow: hidden;
     }
     .header-avator-con{
+      display: inline-block;
       position: absolute;
       right: 0;
       top: 0;
       height: 100%;
-      width: 300px;
+      float: right;
+      .more-info-block{
+        display: inline-block;
+        margin-right: 16px;
+      }
       .icon-btn-group{
-        position: absolute;
-        right: 150px;
+        display: inline-block;
+        margin-right: 12px;
         .switch-theme-con{
           display: inline-block;
           width: 40px;
@@ -147,11 +152,13 @@ html,body{
           }
         }
         .change-skin{
+          display: inline-block;
           font-size: 14px;
           font-weight: 500;
           padding-right: 5px;
         }
         .switch-theme{
+          display: inline-block;
           height: 100%;
         }
         .full-screen-btn-con{
@@ -176,13 +183,15 @@ html,body{
         }
       }
       .user-dropdown{
+        display: inline-block;
+        height: 60px;
+        line-height: 60px;
         &-menu-con{
-          position: absolute;
-          right: 0;
-          top: 0;
-          width: 150px;
+          display: inline-block;
+          max-width: 150px;
           height: 100%;
           .main-user-name{
+            margin-right: 40px;
             display: inline-block;
             width: 80px;
             word-break: keep-all;
@@ -192,10 +201,12 @@ html,body{
             text-overflow: ellipsis;
             text-align: right;
           }
-        }
-        &-innercon{
-          height: 100%;
-          padding-right: 14px;
+          .user-avatar{
+            position: relative;
+            top: 12px;
+            margin-right: 12px;
+            display: inline-block;
+          }
         }
       }
     }

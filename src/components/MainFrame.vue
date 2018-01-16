@@ -29,6 +29,11 @@
           </div>
         </div>
         <div class="header-avator-con">
+          <div class="more-info-block">
+            <slot name="more-info">
+              <!-- <span>调试数据 the quick brown fox jumps over the lazy dog.</span> -->
+            </slot>
+          </div>
           <div class="icon-btn-group">
             <div @click="handleFullScreen" v-if="showFullScreenBtn" class="full-screen-btn-con">
               <Tooltip :content="isFullScreen ? '退出全屏' : '全屏'" placement="bottom">
@@ -56,18 +61,18 @@
             </div> -->
           </div>
           <div class="user-dropdown-menu-con">
-            <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
-              <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
-                <a href="javascript:void(0)">
-                  <span class="main-frame-user-name">{{ userDropdown.username }}</span>
-                  <Icon type="arrow-down-b" v-if="userDropdown.dropdown.length > 0"></Icon>
-                </a>
-                <DropdownMenu slot="list" v-if="userDropdown.dropdown.length > 0">
-                  <DropdownItem v-for="(item, i) in userDropdown.dropdown" :key="i" :name="item.name" :divided="i !== 0">{{item.name}}</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-              <Avatar v-if="userDropdown.avatar" :src="userDropdown.avatar" style="background: #619fe7;margin-left: 10px;"></Avatar>
-            </Row>
+            <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
+              <a href="javascript:void(0)">
+                <span class="main-frame-user-name">{{ userDropdown.username }}</span>
+                <Icon type="arrow-down-b" v-if="userDropdown.dropdown.length > 0"></Icon>
+              </a>
+              <DropdownMenu slot="list" v-if="userDropdown.dropdown.length > 0">
+                <DropdownItem v-for="(item, i) in userDropdown.dropdown" :key="i" :name="item.name" :divided="i !== 0">{{item.name}}</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            <div class="user-avatar">
+              <Avatar v-if="userDropdown.avatar" :src="userDropdown.avatar" style="background: #619fe7; margin-left: 10px;"></Avatar>
+            </div>
           </div>
         </div>
       </div>
