@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import iView from 'iview'
+import iView from 'iview-sincinfo'
 
-import 'iview/dist/styles/iview.css'
+import 'iview-sincinfo/dist/styles/iview.css'
 
 import {SincinfoCommon, ScStore, ScHelper} from './index'
 import App from './App'
